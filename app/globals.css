@@ -158,6 +158,17 @@
     @apply shadow-glass-sm;
   }
   
+  /* Dark background styles */
+  .bg-glass-dark {
+    background-color: rgba(18, 18, 23, 0.7);
+    backdrop-filter: blur(12px);
+  }
+  
+  .bg-glass-dark-gradient {
+    background-image: linear-gradient(to bottom, rgba(23, 23, 28, 0.7), rgba(14, 14, 18, 0.9));
+    backdrop-filter: blur(12px);
+  }
+  
   .glass-card-hover {
     @apply transition-all duration-300 hover:shadow-glass-lg hover:bg-glass-card-hover;
   }

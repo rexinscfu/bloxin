@@ -233,7 +233,7 @@ export default function Home() {
       </section>
 
       {/* Categories Section */}
-      <section className="py-24 bg-opacity-90 dark:bg-glass-dark-gradient bg-gradient-to-b from-white/80 to-gray-100/80 relative overflow-hidden">
+      <section className="py-24 bg-gradient-to-b from-white/80 to-gray-100/80 dark:bg-glass-dark dark:from-transparent dark:to-transparent relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('/images/circuit-pattern.svg')] bg-no-repeat bg-cover opacity-[0.02] dark:opacity-[0.03] z-0" />
         <div className="absolute top-0 left-0 right-0 h-px w-full bg-gradient-to-r from-transparent via-glass-border to-transparent z-[2]" />
         

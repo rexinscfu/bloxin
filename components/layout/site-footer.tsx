@@ -8,8 +8,9 @@ import {
   RiInstagramLine, 
   RiYoutubeLine,
   RiRocketLine,
-  RiBuilding4Line,
-  RiLayoutMasonryLine
+  RiUserLine,
+  RiLayoutMasonryLine,
+  RiMapPinLine
 } from "react-icons/ri";
 
 export function SiteFooter() {
@@ -26,8 +27,8 @@ export function SiteFooter() {
       ]
     },
     { 
-      section: "Company", 
-      icon: <RiBuilding4Line className="h-4 w-4" />,
+      section: "About Me", 
+      icon: <RiUserLine className="h-4 w-4" />,
       links: [
         { name: "About", href: "/about" },
         { name: "Contact", href: "/contact" },
@@ -126,7 +127,7 @@ export function SiteFooter() {
               </div>
             </Link>
             <p className="text-sm text-foreground/70 mb-6 max-w-xs">
-              Expert insights on phone repair, electronics, firmware development, and hardware design.
+              Expert insights on phone repair, electronics, firmware development, and hardware design. Created by Fayssal CHOKRI <span className="inline-flex items-center mt-1"><RiMapPinLine className="h-3 w-3 mr-1 text-glass-primary" /> Casablanca, Morocco</span>
             </p>
             <div className="flex space-x-4">
               <a 
@@ -199,7 +200,7 @@ export function SiteFooter() {
           transition={{ delay: 0.3, duration: 0.8 }}
         >
           <p className="text-sm text-center text-foreground/50 backdrop-blur-sm">
-            &copy; {currentYear} Bloxin. All rights reserved.
+            &copy; {currentYear} Bloxin by Fayssal CHOKRI. All rights reserved.
           </p>
         </motion.div>
       </div>
