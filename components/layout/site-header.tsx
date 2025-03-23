@@ -12,7 +12,8 @@ import {
   RiCloseLine,
   RiHomeSmileLine,
   RiArticleLine,
-  RiUserLine
+  RiUserLine,
+  RiCircuitBoardLine
 } from "react-icons/ri";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -35,6 +36,7 @@ export function SiteHeader() {
     { name: "Repairs", href: "/repairs" },
     { name: "Electronics", href: "/electronics" },
     { name: "Firmware", href: "/firmware" },
+    { name: "Hardware", href: "/hardware" },
     { name: "About", href: "/about" },
   ];
 
@@ -185,6 +187,7 @@ export function SiteHeader() {
                       {item.name === "Repairs" && <RiSmartphoneLine className="h-5 w-5" />}
                       {item.name === "Electronics" && <RiCpuLine className="h-5 w-5" />}
                       {item.name === "Firmware" && <RiCodeSSlashLine className="h-5 w-5" />}
+                      {item.name === "Hardware" && <RiCircuitBoardLine className="h-5 w-5" />}
                       {item.name === "About" && <RiUserLine className="h-5 w-5" />}
                     </span>
                     {item.name}
