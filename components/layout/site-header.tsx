@@ -78,7 +78,7 @@ export function SiteHeader() {
     <header
       className={`sticky top-0 z-50 w-full transition-all duration-500 ${
         isScrolled
-          ? "backdrop-blur-lg bg-glass-dark/30"
+          ? "backdrop-blur-lg bg-opacity-70 dark:bg-glass-dark/30 bg-white/70"
           : "bg-transparent"
       }`}
     >
@@ -157,7 +157,7 @@ export function SiteHeader() {
             animate={{ opacity: 1, height: 'auto', backdropFilter: 'blur(12px)' }}
             exit={{ opacity: 0, height: 0, backdropFilter: 'blur(0px)' }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="md:hidden bg-glass-card border-t border-glass-border-dark overflow-hidden"
+            className="md:hidden bg-opacity-70 dark:bg-glass-card/90 bg-white/90 border-t border-glass-border-dark overflow-hidden"
           >
             <motion.div 
               className="container mx-auto px-6 py-5 space-y-1"

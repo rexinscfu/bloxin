@@ -233,7 +233,7 @@ export default function Home() {
       </section>
 
       {/* Categories Section */}
-      <section className="py-24 bg-glass-dark-gradient relative overflow-hidden">
+      <section className="py-24 bg-opacity-90 dark:bg-glass-dark-gradient bg-gradient-to-b from-white/80 to-gray-100/80 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('/images/circuit-pattern.svg')] bg-no-repeat bg-cover opacity-[0.02] dark:opacity-[0.03] z-0" />
         <div className="absolute top-0 left-0 right-0 h-px w-full bg-gradient-to-r from-transparent via-glass-border to-transparent z-[2]" />
         
@@ -356,7 +356,7 @@ export default function Home() {
       </section>
 
       {/* Newsletter Section */}
-      <section className="py-24 bg-glass-gradient from-glass-primary/10 to-glass-accent/10 dark:from-glass-primary/20 dark:to-glass-accent/20 relative overflow-hidden">
+      <section className="py-24 bg-gradient-to-r from-glass-primary/5 via-glass-secondary/5 to-glass-accent/5 dark:from-glass-primary/20 dark:via-glass-secondary/15 dark:to-glass-accent/20 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('/images/circuit-pattern.svg')] bg-no-repeat bg-cover opacity-[0.02] dark:opacity-[0.04] z-0" />
         <div className="absolute top-0 left-0 right-0 h-px w-full bg-gradient-to-r from-transparent via-glass-border to-transparent z-[2]" />
         <div className="absolute bottom-0 left-0 right-0 h-px w-full bg-gradient-to-r from-transparent via-glass-border to-transparent z-[2]" />

@@ -30,7 +30,7 @@ export function ThemeProvider({
   children,
   defaultTheme = "system",
   enableSystem = true,
-  attribute = "data-theme",
+  attribute = "class",
   disableTransitionOnChange = false,
 }: ThemeProviderProps) {
   const [theme, setThemeState] = useState<Theme>(defaultTheme);
@@ -47,20 +47,14 @@ export function ThemeProvider({
         : "light";
         
       root.classList.add(systemTheme);
+      document.body.classList.remove("light", "dark");
+      document.body.classList.add(systemTheme);
       setResolvedTheme(systemTheme);
     } else {
       root.classList.add(theme);
-      setResolvedTheme(theme);
-    }
-
-    if (attribute === "class") {
       document.body.classList.remove("light", "dark");
       document.body.classList.add(theme);
-    } else {
-      document.body.removeAttribute("data-theme");
-      if (theme !== "system" || !enableSystem) {
-        document.body.setAttribute(attribute, theme);
-      }
+      setResolvedTheme(theme);
     }
   }, [theme, enableSystem, attribute]);
 
@@ -72,7 +66,26 @@ export function ThemeProvider({
       }, 0);
     }
     setThemeState(newTheme);
+    
+    // Save theme preference to localStorage
+    try {
+      localStorage.setItem("theme", newTheme);
+    } catch (e) {
+      // Ignore if localStorage is not available
+    }
   }, [disableTransitionOnChange]);
+
+  // Initialize theme from localStorage if available
+  useEffect(() => {
+    try {
+      const savedTheme = localStorage.getItem("theme") as Theme | null;
+      if (savedTheme) {
+        setThemeState(savedTheme);
+      }
+    } catch (e) {
+      // Ignore if localStorage is not available
+    }
+  }, []);
 
   // Listen for system theme changes
   useEffect(() => {
@@ -82,20 +95,21 @@ export function ThemeProvider({
     
     const handleChange = () => {
       if (theme === "system") {
-        setResolvedTheme(mediaQuery.matches ? "dark" : "light");
+        const newTheme = mediaQuery.matches ? "dark" : "light";
+        setResolvedTheme(newTheme);
         
-        if (attribute === "class") {
-          document.documentElement.classList.remove("light", "dark");
-          document.documentElement.classList.add(
-            mediaQuery.matches ? "dark" : "light"
-          );
-        }
+        const root = window.document.documentElement;
+        root.classList.remove("light", "dark");
+        root.classList.add(newTheme);
+        
+        document.body.classList.remove("light", "dark");
+        document.body.classList.add(newTheme);
       }
     };
 
     mediaQuery.addEventListener("change", handleChange);
     return () => mediaQuery.removeEventListener("change", handleChange);
-  }, [theme, attribute, enableSystem]);
+  }, [theme, enableSystem]);
 
   return (
     <ThemeProviderContext.Provider
