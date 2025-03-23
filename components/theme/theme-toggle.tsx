@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "@/components/theme/theme-provider";
-import { FiSun, FiMoon } from "react-icons/fi";
+import { RiSunLine, RiMoonClearLine } from "react-icons/ri";
 import { motion } from "framer-motion";
 
 export function ThemeToggle() {
@@ -11,24 +11,30 @@ export function ThemeToggle() {
     <motion.button
       whileTap={{ scale: 0.95 }}
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="relative inline-flex h-8 w-14 items-center justify-center rounded-ios-full bg-ios-gray-5 dark:bg-ios-dark-3 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ios-blue"
+      className="relative inline-flex h-9 w-16 items-center justify-center rounded-glass-full bg-glass-card border border-glass-border backdrop-blur-md transition-colors duration-300"
       type="button"
       aria-label="Toggle theme"
     >
       <span className="sr-only">Toggle theme</span>
+      <span className="absolute inset-0 overflow-hidden rounded-glass-full">
+        <span className="absolute inset-0 bg-glass-gradient-radial opacity-10"></span>
+      </span>
       <motion.span
         initial={false}
         animate={{
           x: theme === "dark" ? "calc(100% - 2px)" : "2px",
-          backgroundColor: theme === "dark" ? "#007AFF" : "#ffffff",
+          backgroundColor: theme === "dark" ? "rgba(112, 0, 255, 0.9)" : "rgba(255, 255, 255, 0.9)",
+          boxShadow: theme === "dark" 
+            ? "0 0 10px rgba(112, 0, 255, 0.5)" 
+            : "0 0 10px rgba(255, 255, 255, 0.3)",
         }}
-        className="absolute left-0 h-6 w-6 rounded-full shadow-sm flex items-center justify-center"
+        className="absolute left-0 h-7 w-7 rounded-full shadow-sm flex items-center justify-center"
         transition={{ type: "spring", stiffness: 400, damping: 25 }}
       >
         {theme === "dark" ? (
-          <FiMoon className="h-3 w-3 text-white" />
+          <RiMoonClearLine className="h-4 w-4 text-white" />
         ) : (
-          <FiSun className="h-3 w-3 text-ios-orange" />
+          <RiSunLine className="h-4 w-4 text-glass-warning" />
         )}
       </motion.span>
     </motion.button>
