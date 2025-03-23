@@ -36,24 +36,31 @@ export function ThemeToggle() {
       <span className="absolute inset-0 overflow-hidden rounded-glass-full">
         <span className="absolute inset-0 bg-glass-gradient opacity-10"></span>
       </span>
-      <motion.span
+      <motion.div
         initial={false}
         animate={{
           x: theme === "dark" ? "calc(100% - 2rem)" : "0.25rem",
-          backgroundColor: theme === "dark" ? "rgba(112, 0, 255, 0.9)" : "rgba(255, 215, 0, 0.9)",
-          boxShadow: theme === "dark" 
-            ? "0 0 10px rgba(112, 0, 255, 0.5)" 
-            : "0 0 10px rgba(255, 215, 0, 0.3)",
         }}
-        className="absolute h-7 w-7 rounded-full shadow-sm flex items-center justify-center"
+        className="absolute flex items-center justify-center w-7 h-7"
         transition={{ type: "spring", stiffness: 400, damping: 25 }}
       >
-        {theme === "dark" ? (
-          <RiMoonClearLine className="h-4 w-4 text-white" />
-        ) : (
-          <RiSunLine className="h-4 w-4 text-amber-900" />
-        )}
-      </motion.span>
+        <motion.div
+          className="absolute inset-0 rounded-full flex items-center justify-center"
+          initial={false}
+          animate={{
+            backgroundColor: theme === "dark" ? "rgba(112, 0, 255, 0.9)" : "rgba(255, 215, 0, 0.9)",
+            boxShadow: theme === "dark" 
+              ? "0 0 10px rgba(112, 0, 255, 0.5)" 
+              : "0 0 10px rgba(255, 215, 0, 0.3)",
+          }}
+        >
+          {theme === "dark" ? (
+            <RiMoonClearLine className="h-4 w-4 text-white absolute" />
+          ) : (
+            <RiSunLine className="h-4 w-4 text-amber-900 absolute" />
+          )}
+        </motion.div>
+      </motion.div>
     </motion.button>
   );
 } 

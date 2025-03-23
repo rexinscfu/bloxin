@@ -9,7 +9,10 @@ import {
   RiCodeSSlashLine, 
   RiHardDriveLine, 
   RiMenu4Line, 
-  RiCloseLine 
+  RiCloseLine,
+  RiHomeSmileLine,
+  RiArticleLine,
+  RiUserLine
 } from "react-icons/ri";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -177,12 +180,12 @@ export function SiteHeader() {
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     <span className="mr-3 text-glass-primary">
-                      {item.name === "Home" && <RiSmartphoneLine className="h-5 w-5" />}
-                      {item.name === "Blog" && <RiCodeSSlashLine className="h-5 w-5" />}
+                      {item.name === "Home" && <RiHomeSmileLine className="h-5 w-5" />}
+                      {item.name === "Blog" && <RiArticleLine className="h-5 w-5" />}
                       {item.name === "Repairs" && <RiSmartphoneLine className="h-5 w-5" />}
                       {item.name === "Electronics" && <RiCpuLine className="h-5 w-5" />}
                       {item.name === "Firmware" && <RiCodeSSlashLine className="h-5 w-5" />}
-                      {item.name === "About" && <RiHardDriveLine className="h-5 w-5" />}
+                      {item.name === "About" && <RiUserLine className="h-5 w-5" />}
                     </span>
                     {item.name}
                   </Link>

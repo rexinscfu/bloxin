@@ -7,7 +7,8 @@ import {
   RiCodeSSlashLine, 
   RiHardDriveLine, 
   RiArrowRightLine, 
-  RiMailLine
+  RiMailLine,
+  RiTerminalBoxLine
 } from "react-icons/ri";
 import Link from "next/link";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
@@ -45,7 +46,7 @@ export default function Home() {
     {
       title: "Hardware Design",
       description: "PCB layout, design principles, and DIY hardware projects.",
-      icon: <RiHardDriveLine className="h-8 w-8" />,
+      icon: <RiTerminalBoxLine className="h-8 w-8" />,
       href: "/blog/category/hardware-design",
       gradient: "from-glass-primary/80 to-glass-accent/80",
     },
@@ -330,7 +331,7 @@ export default function Home() {
                       <div className="text-5xl text-glass-primary/30 group-hover:text-glass-primary/50 transition-colors duration-500 relative z-10">
                         {post.category === "Electronics" && <RiCpuLine />}
                         {post.category === "Phone Repair" && <RiSmartphoneLine />}
-                        {post.category === "Hardware Design" && <RiHardDriveLine />}
+                        {post.category === "Hardware Design" && <RiTerminalBoxLine />}
                         {post.category === "Firmware" && <RiCodeSSlashLine />}
                       </div>
                     </div>
