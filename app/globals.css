@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
+:root {
     /* Dark mode by default */
     --background: 14 14 18;
     --foreground: 242 242 247;
