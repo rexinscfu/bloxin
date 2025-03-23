@@ -1,0 +1,300 @@
+---
+title: "Building a Custom Mechanical Keyboard"
+date: "2025-03-05"
+excerpt: "From PCB design to firmware and assembly - create your perfect typing experience."
+author: "Fayssal CHOKRI"
+category: "Hardware Design"
+readTime: "15 min read"
+coverImage: "/images/blog/mechanical-keyboard.jpg"
+---
+
+# Building a Custom Mechanical Keyboard
+
+The world of custom mechanical keyboards offers an exciting opportunity to create a typing experience that's perfectly tailored to your preferences. From selecting switches and designing PCBs to programming firmware and perfecting the final assembly, this guide will walk you through the entire process of building your own mechanical keyboard from scratch.
+
+## Why Build a Custom Keyboard?
+
+Before diving into the technical details, let's consider why you might want to build a custom keyboard:
+
+- **Perfect typing feel**: Choose exactly the switches, keycaps, and typing angle you prefer
+- **Unique layout**: Design a layout that matches your specific workflow and ergonomic needs
+- **Sound profile**: Tune every aspect from case material to plate design for your ideal sound
+- **Aesthetics**: Create a keyboard that complements your setup perfectly
+- **Learning opportunity**: Gain practical skills in electronics design, programming, and fabrication
+
+## Planning Your Keyboard
+
+### 1. Layout Selection
+
+The first decision is your keyboard layout:
+
+- **Form factor**: Full-size, TKL (tenkeyless), 75%, 65%, 60%, 40%, or split designs
+- **ANSI vs ISO**: Different enter key and shift layouts
+- **Special features**: Rotary encoders, OLED displays, or underglow lighting
+
+### 2. Switch Selection
+
+Mechanical switches come in several varieties:
+
+- **Linear**: Smooth keypresses without tactile feedback (e.g., Cherry MX Red, Gateron Yellow)
+- **Tactile**: Noticeable bump during keypress (e.g., Cherry MX Brown, Zealio V2)
+- **Clicky**: Tactile bump with audible click (e.g., Cherry MX Blue, Kailh Box Jade)
+
+Key specifications to consider:
+- Actuation force (typically 45-80g)
+- Actuation distance (typically 2mm)
+- Total travel distance (typically 4mm)
+- Sound profile (high-pitched to deep thock)
+
+## PCB Design
+
+The PCB (Printed Circuit Board) is the heart of your keyboard. Here's how to design one:
+
+### 1. Design Tools
+
+Popular PCB design tools for keyboard projects:
+- **KiCad**: Free and open-source EDA suite
+- **Eagle**: Industry standard with free hobbyist tier
+- **Fusion 360 Electronics**: Integrated mechanical and electrical design
+
+### 2. Schematic Design
+
+Start by creating the electrical schematic:
+
+```
+# Key Matrix Schematic Pseudocode
+for COLUMN in COLUMNS:
+  connect(COLUMN, MICROCONTROLLER_PIN)
+  
+for ROW in ROWS:
+  connect(ROW, MICROCONTROLLER_PIN)
+  
+for ROW in ROWS:
+  for COLUMN in COLUMNS:
+    if KEYSWITCH_EXISTS_AT(ROW, COLUMN):
+      connect(KEYSWITCH, ROW)
+      connect(KEYSWITCH, COLUMN)
+      add_diode(CATHODE, ROW)
+      add_diode(ANODE, KEYSWITCH)
+```
+
+Key components to include:
+- Microcontroller (typically ATmega32u4 or RP2040)
+- Diodes (1N4148) for each switch
+- USB connector (Type-C preferred)
+- Reset button
+- Optional: RGB LEDs, OLED display, rotary encoders
+
+### 3. PCB Layout
+
+Convert your schematic to a physical PCB layout:
+
+1. Place the microcontroller centrally
+2. Arrange switches according to your layout
+3. Route traces efficiently using both sides of the board
+4. Add mounting holes compatible with standard keyboard cases
+5. Include silkscreen labels for debugging and assembly
+
+Design considerations:
+- Keep traces for high-speed signals (USB) short and direct
+- Use a ground plane for better signal integrity
+- Consider adding ESD protection for the USB port
+- Include test points for easy debugging
+
+### 4. PCB Manufacturing
+
+Once your design is complete, generate Gerber files and order from a PCB manufacturer:
+
+- JLCPCB, PCBWay, and OSH Park are popular options
+- Typical specifications: 1.6mm thickness, HASL or ENIG finish
+- Consider color options to match your keyboard theme
+
+## Firmware Development
+
+Modern custom keyboards typically use QMK, VIA, or ZMK firmware:
+
+### 1. QMK Firmware Setup
+
+```bash
+# Clone QMK repository
+git clone https://github.com/qmk/qmk_firmware.git
+cd qmk_firmware
+
+# Install dependencies
+python3 -m pip install -r requirements.txt
+make git-submodule
+
+# Create your keyboard directory
+mkdir -p keyboards/yourkeyboard
+
+# Create necessary files
+touch keyboards/yourkeyboard/config.h
+touch keyboards/yourkeyboard/yourkeyboard.h
+touch keyboards/yourkeyboard/keymaps/default/keymap.c
+```
+
+### 2. Keyboard Configuration
+
+Configure the matrix and pins in `config.h`:
+
+```c
+#pragma once
+
+#include "config_common.h"
+
+// Matrix dimensions
+#define MATRIX_ROWS 5
+#define MATRIX_COLS 15
+
+// Microcontroller pins connected to rows and columns
+#define MATRIX_ROW_PINS { B0, B1, B2, B3, B4 }
+#define MATRIX_COL_PINS { D0, D1, D2, D3, D4, D5, D6, D7, C0, C1, C2, C3, C4, C5, C6 }
+
+// Diode direction
+#define DIODE_DIRECTION COL2ROW
+
+// USB settings
+#define VENDOR_ID       0xFEED
+#define PRODUCT_ID      0x0000
+#define DEVICE_VER      0x0001
+#define MANUFACTURER    YourName
+#define PRODUCT         YourKeyboard
+```
+
+### 3. Keymap Definition
+
+Define your key layout in `keymap.c`:
+
+```c
+#include QMK_KEYBOARD_H
+
+// Define layers
+enum layer_names {
+    _BASE,
+    _FN
+};
+
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+    [_BASE] = LAYOUT(
+        KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC,
+        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSLS,
+        KC_CAPS, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_ENT,
+        KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+        KC_LCTL, KC_LGUI, KC_LALT,                   KC_SPC,                     KC_RALT, KC_RGUI, MO(_FN), KC_RCTL
+    ),
+    [_FN] = LAYOUT(
+        KC_GRV,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,
+        _______, RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, _______, _______, _______, _______, _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______, _______, _______,                   _______,                    _______, _______, _______, _______
+    )
+};
+```
+
+### 4. Compile and Flash
+
+Compile your firmware:
+
+```bash
+# Compile firmware
+make yourkeyboard:default
+
+# Flash firmware (when keyboard is in bootloader mode)
+make yourkeyboard:default:flash
+```
+
+## Case Design
+
+Your keyboard needs a case for structure and aesthetics:
+
+### 1. Case Types
+
+Common case designs include:
+- **Sandwich mount**: PCB mounted between top and bottom plates
+- **Tray mount**: PCB screwed into a tray-shaped case
+- **Top mount**: PCB attached to the top case piece
+- **Gasket mount**: PCB suspended by gaskets for flex and sound isolation
+- **Integrated plate**: Plate and case as a single unit
+
+### 2. Case Design Process
+
+1. **Measurement**: Take precise measurements from your PCB
+2. **CAD Software**: Use Fusion 360, SolidWorks, or FreeCAD
+3. **Design**: Create your case with proper tolerances (typically 0.2mm)
+4. **Iterations**: 3D print prototypes to test fit
+5. **Final Production**: CNC machining for metal cases or injection molding for plastic
+
+### 3. Material Selection
+
+- **Aluminum**: Popular for its weight, sound, and premium feel
+- **Brass**: Heavy with a unique sound profile
+- **Acrylic**: Cost-effective with option for transparent designs
+- **Wood**: Warm aesthetics and sound
+- **Polycarbonate**: Soft typing feel with light diffusion properties
+
+## Assembly Process
+
+### 1. Gather Components
+
+- PCB
+- Switches
+- Stabilizers
+- Plate
+- Case
+- Keycaps
+- Screws
+- USB cable
+- Sound dampening materials (optional)
+
+### 2. Prepare Stabilizers
+
+Stabilizers need modification for optimal performance:
+1. Disassemble and clean with isopropyl alcohol
+2. Apply dielectric grease to wire contacts
+3. Apply thin layer of PTFE lubricant to housing
+4. Clip and/or band-aid mod as desired
+5. Install onto PCB before plate mounting
+
+### 3. Prepare Switches
+
+For the best typing experience:
+1. Open switch housings (if not factory lubed)
+2. Apply PTFE lubricant to slider rails and contact points
+3. Install switch films if desired (reduces housing wobble)
+4. Install springs, applying lubricant if desired
+
+### 4. Assembly Sequence
+
+1. Install stabilizers on PCB
+2. Attach PCB to plate (if using a plate)
+3. Insert switches into plate, ensuring pins align with PCB
+4. Solder switches (unless using hot-swap sockets)
+5. Test PCB functionality with tweezers or via keyboard tester
+6. Install assembly into case
+7. Add any dampening materials (foam, silicone, etc.)
+8. Secure with screws
+9. Install keycaps
+10. Connect USB cable and test
+
+## Sound Tuning
+
+Fine-tune your keyboard's sound profile:
+
+- **Case foam**: Reduces case resonance and hollow sounds
+- **PCB foam**: Dampens switch bottom-out sound
+- **Tape mod**: Apply masking tape to PCB back for a poppy sound
+- **Lubrication**: Different lubes create different sounds
+- **Plate material**: Aluminum (sharp), brass (deep), FR4 (balanced), polycarbonate (soft)
+
+## Conclusion
+
+Building a custom mechanical keyboard is a rewarding project that combines electronics, programming, and craftsmanship. While the process involves many steps, the result is a personalized input device that can significantly enhance your daily computing experience.
+
+Whether you're drawn to the technical challenges, the customization options, or simply the superior typing experience, creating your own keyboard provides both practical skills and a unique end product tailored exactly to your preferences.
+
+Happy building, and enjoy the satisfying clack of your personalized creation!
+
+---
+
+*Looking for more guidance? Check out the Bloxin Discord community where our keyboard enthusiasts share builds, troubleshoot problems, and exchange design files.* 

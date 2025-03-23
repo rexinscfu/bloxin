@@ -130,7 +130,109 @@ module.exports = {
         'auto-100': 'auto 100%',
         '200-auto': '200% auto',
       },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            'code::before': {
+              content: '""',
+            },
+            'code::after': {
+              content: '""',
+            },
+            maxWidth: 'none',
+            a: {
+              color: 'hsl(var(--glass-primary))',
+              '&:hover': {
+                color: 'hsl(var(--glass-primary) / 0.8)',
+              },
+            },
+            h1: {
+              color: 'hsl(var(--foreground))',
+            },
+            h2: {
+              color: 'hsl(var(--foreground))',
+            },
+            h3: {
+              color: 'hsl(var(--foreground))',
+            },
+            h4: {
+              color: 'hsl(var(--foreground))',
+            },
+            blockquote: {
+              color: 'hsl(var(--foreground) / 0.85)',
+              borderLeftColor: 'hsl(var(--glass-primary))',
+            },
+            code: {
+              color: 'hsl(var(--foreground) / 0.9)',
+            },
+            pre: {
+              backgroundColor: 'hsl(var(--glass-dark) / 0.8)',
+              color: 'hsl(var(--foreground) / 0.9)',
+            },
+            strong: {
+              color: 'hsl(var(--foreground) / 0.9)',
+            },
+            thead: {
+              color: 'hsl(var(--foreground))',
+              borderBottomColor: 'hsl(var(--glass-border))',
+            },
+            tbody: {
+              tr: {
+                borderBottomColor: 'hsl(var(--glass-border) / 0.2)',
+              },
+            },
+          },
+        },
+        dark: {
+          css: {
+            color: 'hsl(var(--foreground) / 0.85)',
+            a: {
+              color: 'hsl(var(--glass-primary))',
+              '&:hover': {
+                color: 'hsl(var(--glass-primary) / 0.8)',
+              },
+            },
+            blockquote: {
+              color: 'hsl(var(--foreground) / 0.85)',
+              borderLeftColor: 'hsl(var(--glass-primary))',
+            },
+            h1: {
+              color: 'hsl(var(--foreground))',
+            },
+            h2: {
+              color: 'hsl(var(--foreground))',
+            },
+            h3: {
+              color: 'hsl(var(--foreground))',
+            },
+            h4: {
+              color: 'hsl(var(--foreground))',
+            },
+            code: {
+              color: 'hsl(var(--foreground) / 0.9)',
+            },
+            pre: {
+              backgroundColor: 'hsl(var(--glass-dark) / 0.9)',
+              color: 'hsl(var(--foreground) / 0.9)',
+            },
+            strong: {
+              color: 'hsl(var(--foreground) / 0.9)',
+            },
+            thead: {
+              color: 'hsl(var(--foreground))',
+              borderBottomColor: 'hsl(var(--glass-border))',
+            },
+            tbody: {
+              tr: {
+                borderBottomColor: 'hsl(var(--glass-border) / 0.2)',
+              },
+            },
+          },
+        },
+      }),
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 } 
