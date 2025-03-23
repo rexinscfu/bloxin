@@ -1,0 +1,29 @@
+<svg width="1000" height="1000" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="circuit-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+      <!-- Circuit Lines -->
+      <path d="M10,50 L40,50 M60,50 L90,50 M50,10 L50,40 M50,60 L50,90" stroke="currentColor" stroke-width="2" fill="none" opacity="0.7"/>
+      <path d="M10,20 L30,20 L30,80 L10,80" stroke="currentColor" stroke-width="2" fill="none" opacity="0.7"/>
+      <path d="M70,20 L90,20 M70,80 L90,80 M20,30 L20,70 M80,30 L80,70" stroke="currentColor" stroke-width="2" fill="none" opacity="0.5"/>
+      
+      <!-- Connection Dots -->
+      <circle cx="50" cy="50" r="4" fill="currentColor" opacity="0.8"/>
+      <circle cx="20" cy="20" r="3" fill="currentColor" opacity="0.6"/>
+      <circle cx="80" cy="20" r="3" fill="currentColor" opacity="0.6"/>
+      <circle cx="20" cy="80" r="3" fill="currentColor" opacity="0.6"/>
+      <circle cx="80" cy="80" r="3" fill="currentColor" opacity="0.6"/>
+      
+      <!-- Components -->
+      <rect x="45" y="70" width="10" height="20" fill="currentColor" opacity="0.4"/>
+      <rect x="70" y="45" width="20" height="10" fill="currentColor" opacity="0.4"/>
+      
+      <!-- Curved Traces -->
+      <path d="M30,20 C40,20 40,30 40,40" stroke="currentColor" stroke-width="2" fill="none" opacity="0.5"/>
+      <path d="M60,40 C60,30 70,30 70,20" stroke="currentColor" stroke-width="2" fill="none" opacity="0.5"/>
+      <path d="M60,60 C60,70 70,70 70,80" stroke="currentColor" stroke-width="2" fill="none" opacity="0.5"/>
+      <path d="M30,80 C40,80 40,70 40,60" stroke="currentColor" stroke-width="2" fill="none" opacity="0.5"/>
+    </pattern>
+  </defs>
+  
+  <rect x="0" y="0" width="100%" height="100%" fill="url(#circuit-pattern)"/>
+</svg> 

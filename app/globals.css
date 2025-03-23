@@ -1,0 +1,177 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 255 255 255;
+    --foreground: 10 10 10;
+    
+    --card: 255 255 255;
+    --card-foreground: 10 10 10;
+    
+    --border: 240 240 240;
+    --input: 240 240 240;
+    
+    --primary: 0 122 255;
+    --primary-foreground: 255 255 255;
+    
+    --secondary: 242 242 247;
+    --secondary-foreground: 10 10 10;
+    
+    --accent: 175 82 222;
+    --accent-foreground: 255 255 255;
+    
+    --destructive: 255 59 48;
+    --destructive-foreground: 255 255 255;
+    
+    --ring: 0 122 255;
+  }
+
+  .dark {
+    --background: 28 28 30;
+    --foreground: 255 255 255;
+    
+    --card: 44 44 46;
+    --card-foreground: 255 255 255;
+    
+    --border: 58 58 60;
+    --input: 58 58 60;
+    
+    --primary: 10 132 255;
+    --primary-foreground: 255 255 255;
+    
+    --secondary: 44 44 46;
+    --secondary-foreground: 255 255 255;
+    
+    --accent: 191 90 242;
+    --accent-foreground: 255 255 255;
+    
+    --destructive: 255 69 58;
+    --destructive-foreground: 255 255 255;
+    
+    --ring: 10 132 255;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-gray-200 dark:border-ios-dark-3;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+  
+  p {
+    @apply leading-7;
+  }
+  
+  .disable-transition * {
+    transition: none !important;
+  }
+}
+
+/* iOS-style custom scrollbar */
+@layer utilities {
+  .scrollbar-ios {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+  }
+  
+  .dark .scrollbar-ios {
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+  }
+  
+  .scrollbar-ios::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  .scrollbar-ios::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .scrollbar-ios::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+  }
+  
+  .dark .scrollbar-ios::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* iOS-style form elements */
+@layer components {
+  .ios-input {
+    @apply rounded-ios px-4 py-3 bg-ios-gray-6 dark:bg-ios-dark-3 border-transparent focus:border-ios-blue focus:ring-1 focus:ring-ios-blue dark:focus:border-ios-blue dark:focus:ring-ios-blue transition-all duration-200;
+  }
+  
+  .ios-button {
+    @apply rounded-ios-full px-5 py-2.5 bg-ios-blue text-white font-medium hover:bg-ios-blue/90 active:scale-95 transition-all duration-200;
+  }
+  
+  .ios-button-secondary {
+    @apply rounded-ios-full px-5 py-2.5 bg-ios-gray-6 dark:bg-ios-dark-3 text-black dark:text-white font-medium hover:bg-ios-gray-5 dark:hover:bg-ios-dark-2 active:scale-95 transition-all duration-200;
+  }
+  
+  .ios-card {
+    @apply rounded-ios bg-white dark:bg-ios-dark-3 shadow-ios-sm border border-gray-100 dark:border-ios-dark-4 overflow-hidden;
+  }
+  
+  .ios-surface {
+    @apply bg-ios-gray-6 dark:bg-ios-dark-2 rounded-ios border border-gray-200 dark:border-ios-dark-3;
+  }
+}
+
+/* Utility animation classes */
+@layer utilities {
+  .animate-ios-appear {
+    animation: ios-appear 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .animate-ios-slide-up {
+    animation: ios-slide-up 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .animate-ios-scale {
+    animation: ios-scale 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+@keyframes ios-appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes ios-slide-up {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes ios-scale {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
